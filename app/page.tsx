@@ -3,8 +3,7 @@ import AdSlot, { AD_ENABLED } from "@/components/AdSlot";
 import Header from "@/components/Header";
 import BreakingBanner from "@/components/BreakingBanner";
 import StatsBar from "@/components/StatsBar";
-import Tabs from "@/components/Tabs";
-import TrillionairesTable from "@/components/TrillionairesTable";
+import Rankings from "@/components/Rankings";
 import Footer from "@/components/Footer";
 
 // Formatted once on the server so the banner's date matches on hydration.
@@ -27,8 +26,7 @@ export default function Home() {
             takes over while this banner disappears. */}
         {!AD_ENABLED && <BreakingBanner date={todayEastern} />}
         <StatsBar />
-        <Tabs />
-        <TrillionairesTable />
+        <Rankings />
       </main>
       <Footer />
     </div>
