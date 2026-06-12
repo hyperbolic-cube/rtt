@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Work_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // Google AdSense publisher account. The loader script below is all AdSense
@@ -80,6 +81,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         {children}
+        <Analytics />
       </body>
     </html>
   );
