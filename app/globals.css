@@ -1,26 +1,105 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Design tokens */
+  --ink: #0a0a0b;
+  --ink-soft: #141416;
+  --line: #26262b;
+  --forbes-blue: #3b9fe8;
+  --up: #34d399;
+  --down: #fb5d6b;
+  --forbes-red: #e10600;
+
+  --background: var(--ink);
+  --foreground: #f4f4f5;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-forbes-blue: var(--forbes-blue);
+  --color-up: var(--up);
+  --color-down: var(--down);
+  --color-forbes-red: var(--forbes-red);
+  --font-display: var(--font-playfair);
+  --font-sans: var(--font-work-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--line);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-work-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Forbes/Bloomberg-style hero glow behind the title (maroon/red tint) */
+.hero-glow {
+  position: relative;
+}
+.hero-glow::before {
+  content: "";
+  position: absolute;
+  inset: -40% -20% auto -20%;
+  height: 520px;
+  background: radial-gradient(
+    ellipse 50% 60% at 50% 30%,
+    rgba(225, 6, 0, 0.18),
+    rgba(120, 4, 12, 0.08) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Net-worth flash animations. key={tick} remounts the cell to restart these. */
+@keyframes flash-up {
+  0% {
+    color: var(--up);
+    text-shadow: 0 0 18px rgba(52, 211, 153, 0.55);
+  }
+  100% {
+    color: var(--up);
+    text-shadow: 0 0 0 rgba(52, 211, 153, 0);
+  }
+}
+@keyframes flash-down {
+  0% {
+    color: var(--down);
+    text-shadow: 0 0 18px rgba(251, 93, 107, 0.55);
+  }
+  100% {
+    color: var(--down);
+    text-shadow: 0 0 0 rgba(251, 93, 107, 0);
+  }
+}
+.flash-up {
+  animation: flash-up 500ms ease-out forwards;
+}
+.flash-down {
+  animation: flash-down 500ms ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flash-up,
+  .flash-down {
+    animation: none;
+  }
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--forbes-blue);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
