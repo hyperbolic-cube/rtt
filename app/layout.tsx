@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Work_Sans } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 // Google AdSense publisher account. The loader script below is all AdSense
@@ -73,12 +72,12 @@ export default function RootLayout({
       className={`${playfair.variable} ${workSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ink text-foreground">
-        <Script
-          id="adsbygoogle-init"
+        {/* React hoists this async script into <head>, matching the snippet
+            Google AdSense asks you to paste between the <head></head> tags. */}
+        <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
         {children}
       </body>
