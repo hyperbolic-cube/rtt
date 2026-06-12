@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Work_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+
+// Google AdSense publisher account. The loader script below is all AdSense
+// needs to crawl and approve the site; individual ad units are wired up
+// separately in components/AdSlot.tsx.
+const ADSENSE_CLIENT = "ca-pub-5401649323244175";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -67,6 +73,13 @@ export default function RootLayout({
       className={`${playfair.variable} ${workSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ink text-foreground">
+        <Script
+          id="adsbygoogle-init"
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         {children}
       </body>
     </html>
