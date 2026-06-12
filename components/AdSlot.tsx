@@ -1,6 +1,7 @@
 // Flip this to true (or wire it to an env var) once a real ad unit is pasted
-// in below. While there is no ad to show, the slot renders nothing at all.
-const AD_ENABLED = false;
+// in below. While there is no ad to show, the slot renders nothing at all and
+// the BreakingBanner takes its place (see app/page.tsx).
+export const AD_ENABLED = false;
 
 export default function AdSlot() {
   if (!AD_ENABLED) return null;
